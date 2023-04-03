@@ -11,6 +11,8 @@ const mongodbConfig = require('./database/config/mongodb.config');
 
 //controllers
 
+//controllers
+const checkConnection = require('./controllers/connection/check-connection');
 
 const protect = require('./controllers/protect/protect');
 
@@ -61,6 +63,9 @@ app.get('/api/', checkConnection);
 
 app.post('/api/registration', handleRegistration);
 
+app.post('/api/authentication', handleAuthentication);
+app.post('/api/authentication/password/forgot', forgotAuthenticationPassword);
+app.post('/api/authentication/password/reset', resetAuthenticationPassword);
 
 //run
 app.listen(appPort, () => { console.log(appPort) });
