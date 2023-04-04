@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  
+  client:
+    build: ./client
+    volumes:
+      - ./client:/usr/src/app
+    ports:  
+      - 3000:3000
+
+  server:
+    build: ./server
+    volumes:
+      - ./server:/usr/src/app
+    ports:
+      - 5000:5000
+  
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/db/mongo
+  
+  redis:
+    image: redis:6.2-alpine
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - 6379:6379      
+    volumes:
+      - "redis_data:/db/redis"
+    restart: unless-stopped
+
+volumes:
+  mongodb:
+    driver: local
+  redis_data:
+    driver: local

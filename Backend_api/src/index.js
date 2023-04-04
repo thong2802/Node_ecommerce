@@ -19,6 +19,12 @@ const protect = require('./controllers/protect/protect');
 const handleRegistration = require('./controllers/registration/handle-registration');
 const handleAuthentication = require('./controllers/authentication/handle-authentication');
 
+const loadAccountManageInfo = require('./controllers/info/load-account-manage-info');
+const editAccountInfo = require('./controllers/account/edit-account-info');
+const changeAccountPassword = require('./controllers/account/change-account-password');
+const updateAccountAvatar = require('./controllers/account/update-account-avatar');
+const forgotAuthenticationPassword = require('./controllers/authentication/forgot-authentication-password');
+const resetAuthenticationPassword = require('./controllers/authentication/reset-authentication-password');
 
 const postProductDetail = require('./controllers/product/post-product-detail');
 const loadProductDetail = require('./controllers/product/load-product-detail');
@@ -81,20 +87,6 @@ app.post('/api/registration', handleRegistration);
 app.post('/api/authentication', handleAuthentication);
 app.post('/api/authentication/password/forgot', forgotAuthenticationPassword);
 app.post('/api/authentication/password/reset', resetAuthenticationPassword);
-
-app.get('/api/product/detail/load', loadProductDetail);
-app.get('/api/product/manage/detail/delete', protect, deleteProductDetail);
-app.get('/api/product/manage/delete', protect, deleteProduct);
-app.get('/api/product/list/category/load', loadProductListOnCategory);
-app.get('/api/product/list/best-selling', loadBestSellingList);
-app.get('/api/product/list/new', loadNewProductList);
-app.get('/api/product/list/discount', loadDiscountList);
-app.post('/api/product/list/name/load', loadProductListOnName);
-app.post('/api/product/manage/detail/edit', protect, editProductDetail);
-app.post('/api/product/manage/detail/add', protect, addProductDetail);
-app.post('/api/product/detail/post', protect, postProductDetail);
-app.post('/api/product/comment/post', protect, postProductComment);
-app.post('/api/product/search', searchProduct);
 
 //run
 app.listen(appPort, () => { console.log(appPort) });
