@@ -19,6 +19,12 @@ const protect = require('./controllers/protect/protect');
 const handleRegistration = require('./controllers/registration/handle-registration');
 const handleAuthentication = require('./controllers/authentication/handle-authentication');
 
+const loadAccountManageInfo = require('./controllers/info/load-account-manage-info');
+const editAccountInfo = require('./controllers/account/edit-account-info');
+const changeAccountPassword = require('./controllers/account/change-account-password');
+const updateAccountAvatar = require('./controllers/account/update-account-avatar');
+const forgotAuthenticationPassword = require('./controllers/authentication/forgot-authentication-password');
+const resetAuthenticationPassword = require('./controllers/authentication/reset-authentication-password');
 
 //config
 const app = express();
@@ -66,6 +72,12 @@ app.post('/api/registration', handleRegistration);
 app.post('/api/authentication', handleAuthentication);
 app.post('/api/authentication/password/forgot', forgotAuthenticationPassword);
 app.post('/api/authentication/password/reset', resetAuthenticationPassword);
+
+app.get('/api/account/manage/info/load', protect, loadAccountManageInfo);
+app.post('/api/account/manage/info/edit', protect, editAccountInfo);
+app.post('/api/account/manage/avatar/update', protect, updateAccountAvatar);
+app.post('/api/account/manage/password/change', protect, changeAccountPassword);
+
 
 //run
 app.listen(appPort, () => { console.log(appPort) });
